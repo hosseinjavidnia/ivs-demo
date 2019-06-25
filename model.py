@@ -94,9 +94,10 @@ class model():
             left_end, right_end, weight = Get_weight(target, self.prev_targets, self.num_frames, at_least=at_least)
         else:
             raise NotImplementedError
-
-        self.Prop_forward(target, right_end)
-        self.Prop_backward(target, left_end)
+            
+        with torch.no_grad():
+            self.Prop_forward(target, right_end)
+            self.Prop_backward(target, left_end)
 
         for f in range(self.num_frames):
             self.all_E[:,:,f] = weight[f] * self.all_E[:,:,f] + (1-weight[f]) * self.prev_E[:,:,f]

@@ -100,7 +100,7 @@ class model():
             self.Prop_backward(target, left_end)
 
         for f in range(self.num_frames):
-            self.all_E[:,:,f] = weight[f] * self.all_E[:,:,f] + (1-weight[f]) * self.prev_E[:,:,f]
+            self.all_E[:, f, :, :] = weight[f] * self.all_E[:, f, :, :] + (1 - weight[f]) * self.prev_E[:, f, :, :]
 
         self.prev_targets.append(target)
         print('[MODEL] Propagation finished.')    
